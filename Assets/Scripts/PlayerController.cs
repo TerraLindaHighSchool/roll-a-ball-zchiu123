@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 0;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
+    public GameObject loseTextObject;
 
     private Rigidbody rb;
     private int count;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
         SetCountText();
         winTextObject.SetActive(false);
+        loseTextObject.SetActive(false);
     }
 
     private void OnMove(InputValue movementValue)
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
-        if (count >= 12)
+        if (count >= 18)
         {
             winTextObject.SetActive(true);
         }
@@ -57,6 +59,10 @@ public class PlayerController : MonoBehaviour
             count = count + 1;
                 
             SetCountText();
+        }
+        if (other.gameObject.CompareTag("DangerWall"))
+        {
+            loseTextObject.SetActive(true);
         }
     }
 }
